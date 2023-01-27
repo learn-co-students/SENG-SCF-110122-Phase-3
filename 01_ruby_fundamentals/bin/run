@@ -3,3 +3,4 @@
 require_relative "../config/environment"
 
 start_cli
+print_menu_options

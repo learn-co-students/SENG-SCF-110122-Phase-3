@@ -21,4 +21,13 @@ require_all "lib"
 # interact with the most recent version without restarting the console
 def reload
   load "lib/dog.rb"
+  load "lib/dogs_data.rb"
+  load "lib/dog_walker_cli.rb"
 end
+
+# give us Date.now
+require "date"
+
+#active support modules give us math functionality
+require "active_support/core_ext/integer/time"
+require "active_support/core_ext/date/calculations"

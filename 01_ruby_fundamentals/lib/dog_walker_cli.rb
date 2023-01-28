@@ -23,7 +23,7 @@ end
 # if the user types "exit" we'll print a message thanking them
 # for using the CLI and invoke to terminate the program
 # otherwise, return whatever the user typed in
-def ask_for_choice
+def ask_for_input
   input = gets.chomp
   # if input is exit, we want to exit. don't want input = "exit"
   if input == "exit"
@@ -71,13 +71,37 @@ end
 # Take this information and put it into a hash
 # add the hash to the dogs array passed as an argument
 # print the newly added dog
-
+def add_dog(dogs_arr)
+  print "What is the dog's name? "
+  name = ask_for_input
+  print "What is the dog's age? "
+  age = ask_for_input
+  print "What is the dog's breed? "
+  breed = ask_for_input
+  print "What is the dog's image_url? "
+  image_url = ask_for_input
+  dog_hash = {
+    name: name,
+    age: age,
+    breed: breed,
+    image_url: image_url
+  }
+  dogs_arr << dog_hash
+end
 
 
 # define a method `handle_choice` which will take a `choice` as a 
 # parameter and handle it in the appropriate way based on the menu
 # option that was chosen
-
-
+def handle_choice(choice)
+  if choice == "1"
+    list_dogs($dogs)
+  elsif choice == "2"
+    add_dog($dogs)
+  elsif choice == "debug"
+    binding.pry
+  else puts "ummmm we don't compute. Please try your answer again.".red
+  end
+end
 
 

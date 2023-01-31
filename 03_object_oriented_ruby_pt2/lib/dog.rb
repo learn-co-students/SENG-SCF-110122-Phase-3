@@ -10,6 +10,10 @@ class Dog
 
 
 
+  # ✅ We want to be able to initialize, save and return a new dog.
+
+
+
   # ✅ We want to be able to view all dogs that need a walk
   
   

@@ -1,17 +1,24 @@
-lennon = Dog.create(
-  name: "Lennon", 
-  age: "2020-08-31", 
-  breed: "Pomeranian", 
-  image_url: "https://res.cloudinary.com/dnocv6uwb/image/upload/v1609370267/dakota-and-lennon-square-compressed_hoenfo.jpg"
+puts "🌱 seeding database..."
+
+tr = Dog.create(
+  name: "Tiger Rose", 
+  birthdate: "2017-07-04", 
+  breed: "Jindo", 
+  image_url: "https://www.akc.org/wp-content/uploads/2017/11/Jindo-standing-in-the-yard.jpg"
 )
-olivia = Dog.create(
-  name: "Olivia",	
-  birthdate: "2020-03-31",
-  breed:	"Terrier",
-  image_url: "https://res.cloudinary.com/dnocv6uwb/image/upload/v1631229064/zx6CPsp_d_utkmww.webp"
+lola = Dog.create(
+  name: "Lola",	
+  birthdate: "2018-03-31",
+  breed:	"Lab Mix",
+  image_url: "https://puppyintraining.com/wp-content/uploads/black-lab-border-collie-mix.jpeg"
 )
 
 # create a couple of walks and feedings for Lennon 
-
+Walk.create(time: 1.hour.ago, dog: tr)
+Walk.create(time: 1.day.ago, dog: lola)
 
 # create a couple of walks and feedings for Olivia
+Feeding.create(time: 3.hours.ago, dog_id: tr.id)
+Feeding.create(time: 2.days.ago, dog: lola)
+
+puts "seeding complete... 🌱"

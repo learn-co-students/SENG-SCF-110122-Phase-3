@@ -1,6 +1,6 @@
 class Dog
 
-
+class SomeClasses
   attr_accessor :name, :breed
 
   def initialize(name:, breed:)
@@ -11,6 +11,8 @@ class Dog
   def bark
     puts "rufffff"
   end
+
+end
 
 
   def eat

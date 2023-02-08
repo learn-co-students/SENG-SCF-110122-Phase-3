@@ -1,7 +1,7 @@
 require_relative "./dog"
 require "pry"
 
-class RobotDog < Dog
+class RobotDog < Dog::SomeClasses
   
 end
 

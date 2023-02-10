@@ -3,7 +3,7 @@ class CreateFeedings < ActiveRecord::Migration[6.1]
     create_table :feedings do |t|
       t.datetime :time
       t.integer :dog_id
-      # t.belongs_to :dog, foreign_key: true
+      # t.belongs_to :dog, foreign_key: true, null :false
     end
   end
 end

@@ -1,6 +1,7 @@
 class Dog < ActiveRecord::Base
-  # ✅ Ensure a many to many relationship between dogs and walks
-  has_many :walks
+  # ✅✅ Ensure a many to many relationship between dogs and walks
+  has_many :dog_walks
+  has_many :walks, through: :dog_walks
   has_many :feedings
 
   # Class methods will be defined above instance methods by convention

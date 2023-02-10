@@ -20,7 +20,7 @@ class Dog < ActiveRecord::Base
     self.where.not(id: fed_dog_ids)
   end
   
-  # ✅ Refactor: Let's use the pattern of AR query methods (instead of Ruby methods) to return restless dogs
+  # ✅ Refactor: Let's use the above pattern of AR query methods (instead of Ruby methods) to return restless dogs
   # return all of the dogs who need a walk
   def self.needs_walking
     self.all.filter do |dog|
@@ -62,12 +62,18 @@ class Dog < ActiveRecord::Base
     self.feedings.create(time: now)
   end
 
-  # ✅ We'll be removing the last_walked_at and last_fed_at columns, so we'll need to add methods for those:
+  # ✅✅ We'll be removing the last_walked_at and last_fed_at columns, so we've added methods for those:
   
-  # ✅ last_walked_at will query the related walks, order them in descending order by time and get the time of the first if it exists
+  # ✅✅ last_walked_at will query the related walks, order them in descending order by time and get the time of the first if it exists
+  def last_walked_at
+    self.walks.order(time: :desc).first&.time
+  end
 
   
-  # ✅ last_fed_at will query the related feedings, order them in descending order by time and get the time of the first if it exists
+  # ✅✅ last_fed_at will query the related feedings, order them in descending order by time and get the time of the first if it exists
+  def last_fed_at
+    self.feedings.order(time: :desc).first&.time
+  end
 
 
   # We want to know if a dog needs a walk. 

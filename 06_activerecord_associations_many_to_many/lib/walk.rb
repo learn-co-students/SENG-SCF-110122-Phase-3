@@ -13,7 +13,12 @@ class Walk < ActiveRecord::Base
     self.dogs.pluck(:breed)
   end
 
-  # ✅ add a .recent method that returns all walks in the last 4 hours
+  # ✅✅ add a .recent method that returns all walks in the last 4 hours
+  def self.recent
+    self.where(time: 4.hours.ago..Time.now)
+  end
+
+   # call recent on Walk (or self) return all walks that meet the condition of within a time frame (4 hours)
 
   # takes the time of the walk and formats it as a string like this:
   # Friday, 04/08 4:57 PM

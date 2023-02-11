@@ -1,5 +1,19 @@
 # ActiveRecord Associations - Many to Many
 
+
+
+Dog walker app:
+	[x] remove last_walked, last_fed columns from dogs table
+
+Dog Class:
+	[x] go thru self.hungry and refactor self.needs_walking
+	[x] quickie refactor on walk and feed methods
+	[x] (we have new methods that query the related tables for last_fed, 
+	last_walked. Let's check 'em out!)
+
+Walk Class: 
+	[x] create .recent method (will use .where on self)
+
 ## Key Concepts for the day:
 
 - Rake

@@ -9,10 +9,11 @@ class Dog < ActiveRecord::Base
 
   # ✅✅ Refactored: Use AR Query methods to return hungry dogs
   # return all of the dogs who are hungry
-  def self.hungry
-    # we want all dogs who have not been fed in last 6 hours
+
+  # we want all dogs who have not been fed in last 6 hours
     # get all dogs who've been fed in the last 6 hours and then get the dogs who AREN'T in that list
     # this is the collection of dogs who HAVE been fed
+  def self.hungry
     fed_dog_ids = self.includes(:feedings).where(feedings: {
       time: 6.hours.ago..Time.now
     }).ids
@@ -23,9 +24,11 @@ class Dog < ActiveRecord::Base
   # ✅ Refactor: Let's use the above pattern of AR query methods (instead of Ruby methods) to return restless dogs
   # return all of the dogs who need a walk
   def self.needs_walking
-    self.all.filter do |dog|
-      dog.needs_a_walk?
-    end
+    walked_dog_ids = self.includes(:walks).where(walks: {
+      time: 4.hours.ago..Time.now
+    }).ids
+    # or we can call .pluck(:ids) but this would query our db again which we don't want
+    self.where.not(id: walked_dog_ids)
   end
   
 
@@ -50,7 +53,6 @@ class Dog < ActiveRecord::Base
   # we want to be able to take a dog on a walk and track when they were last walked
   def walk
     now = DateTime.now
-    self.last_walked_at = now
     self.walks.create(time: now)
   end
 
@@ -58,7 +60,6 @@ class Dog < ActiveRecord::Base
   # we want to be able to feed a dog and track when they were last fed
   def feed
     now = DateTime.now
-    self.last_fed_at = now
     self.feedings.create(time: now)
   end
 

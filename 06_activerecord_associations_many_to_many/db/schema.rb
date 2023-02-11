@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_10_004408) do
+ActiveRecord::Schema.define(version: 2023_02_11_142404) do
 
   create_table "dog_walks", force: :cascade do |t|
     t.integer "dog_id", null: false
@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(version: 2023_02_10_004408) do
     t.datetime "birthdate"
     t.string "breed"
     t.string "image_url"
-    t.datetime "last_fed_at"
-    t.datetime "last_walked_at"
   end
 
   create_table "feedings", force: :cascade do |t|

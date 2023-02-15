@@ -1,19 +1,13 @@
 class WalksController < ApplicationController
 
   get "/walks" do 
-    options = get_walk_json_config(include_dogs: params.include?("include_dogs"))
-    Walk.all.to_json(options)
+    check_for_include_dogs(Walk.all)
   end
 
-  get "/walks/recent" do 
-    options = get_walk_json_config(include_dogs: params.include?("include_dogs"))
-    Walk.recent.to_json(options)
-  end
 
   get "/walks/:id" do 
     walk = Walk.find(params[:id])
-    options = get_walk_json_config(include_dogs: true)
-    walk.to_json(options)
+    check_for_include_dogs(walk)
   end
 
  
@@ -42,20 +36,12 @@ class WalksController < ApplicationController
     params.select {|param,value| allowed_params.include?(param)}
   end
   
-  def get_walk_json_config(include_dogs: false)
-    options = {
-      methods: [:formatted_time]
-    }
-    if include_dogs
-      options.merge!({
-        include: {
-          dogs: {
-            methods: [:age]
-          }
-        }
-      }) 
+  def check_for_include_dogs(walk_or_walks)
+    if params.include?("include_dogs")
+      walk_or_walks.to_json(methods: [:formatted_time], except: [:created_at, :updated_at], include: {:dogs => {methods: [:age], only: [:name, :breed]}})
+    else 
+      walk_or_walks.to_json(methods: [:formatted_time], except: [:created_at, :updated_at])
     end
-    options
   end
 
 end

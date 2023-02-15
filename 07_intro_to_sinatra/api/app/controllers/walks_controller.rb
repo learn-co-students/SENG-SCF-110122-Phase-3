@@ -1,7 +1,13 @@
 class WalksController < ApplicationController
 
   get "/walks" do 
-    binding.pry
+    if params.include?("include_dogs")
+      puts "TODO - I need to include DOGS"
+      puts params
+      Walk.all.to_json(include: {:dogs => {only: [:name], methods: [:age]}})
+    else
+      Walk.all.to_json(methods: [:formatted_time])
+    end
   end
 
   private 

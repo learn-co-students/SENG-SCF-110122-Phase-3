@@ -4,6 +4,7 @@ class ApplicationController < Sinatra::Base
   # method "URL" do
     
   # end
+  
   get "/hi" do 
     { hello: "world"}
   end

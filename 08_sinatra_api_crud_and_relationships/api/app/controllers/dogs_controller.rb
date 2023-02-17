@@ -10,14 +10,33 @@ class DogsController < ApplicationController
   end
 
   # ✅ we want to be able to create dogs through the API
+  post "/dogs" do
+    dog = Dog.create(dog_params)
+    dog.to_json
+  end
 
-  
+  # def initialize(attributes = {})
+  #   attributes.each do |attr, value|
+  #     self.send("#{attr}=", value)
+  #   end
+  # end
+
+  # Dog.create(name: name, breed: breed, .......)
 
   # ✅ we want to be able to update dogs through the API
-  
+  patch "/dogs/:id" do
+    dog = Dog.find(params[:id])
+    dog.update(dog_params)
+    check_for_include_dog_walks(dog)
+  end
 
   # ✅ we want to be able to delete dogs through the API
-  
+  delete "/dogs/:id" do
+    dog = Dog.find(params[:id])
+    dog.destroy
+    # dog.to_json
+    status 204
+  end
 
   private 
 
@@ -29,6 +48,8 @@ class DogsController < ApplicationController
    # orrrrr => allowed_params = %w(name birthdate breed image_url)
     params.select {|param,value| allowed_params.include?(param)}
   end
+
+
 
   def check_for_include_dog_walks(dog_or_dogs)
     if params.include?("include_walks")

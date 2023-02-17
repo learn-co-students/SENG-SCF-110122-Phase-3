@@ -4,13 +4,17 @@ class DogWalksController < ApplicationController
 
   # ✅ we want to be able to update dog_walks through the API to update pooped. But if we wanted to update the time of the walk as well we could do that from here! Thru an additional custom method we will write in the DogWalk model.
   patch "/dog_walks/:id" do
-    
+    dog_walk = DogWalk.find(params[:id])
+    dog_walk.update(dog_walk_params)
+    dog_walk.to_json
   end
 
   # ✅ we want to be able to delete dog_walks through the API (altho this is also done via walks)
   # perhaps deleting dog_walk would be done by the actual dog owner client, and the deleting via walks would happen from an administrator
   delete "/dog_walks/:id" do
-   
+    dog_walk = DogWalk.find(params[:id])
+    dog_walk.destroy
+    status 204
   end
 
   private 
